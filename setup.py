@@ -49,10 +49,10 @@ def get_ucsc_tools(arch_type):
 
 def get_ucsc_data(hg,namefile,odir,biofold_path='http://snps.biofold.org/Fido-SNP/ucsc'):
 	prog_dir = os.path.dirname(os.path.abspath(__file__))
-        ucsc_dir = prog_dir+'/'+hg
+        ucsc_dir = prog_dir+'/ucsc/'+hg
 	prog_get = 'wget'
 	print '\n   Download',namefile
-	data = ucsc_dat+'/'+hg+'/'+odir+'/'+namefile
+	data = biofold_path+'/'+hg+'/'+odir+'/'+namefile
 	cmd = prog_get+' '+data+' -O '+ucsc_dir+'/'+namefile
 	print 'CMD:',cmd
 	out=getstatusoutput(cmd)
