@@ -266,7 +266,7 @@ if __name__ == '__main__':
 	opt=args[0]
 	if opt=='install' and len(args)>1:
 		arch_type=args[1]
-		arch_list=['linux.x86_64.v287','linux.x86_64',\
+		arch_list=['linux.x86_64',\
 			'macOSX.x86_64','macOSX.i386','macOSX.ppc']
 		if arch_type not in arch_list:
 			print >> sys.stderr,'ERROR: Incorrect architecture type.'
