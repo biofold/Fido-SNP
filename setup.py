@@ -3,7 +3,7 @@ from commands import getstatusoutput
 global ucsc_tool, ucsc_path, biofold_path
 ucsc_tool='http://hgdownload.cse.ucsc.edu/admin/exe'
 ucsc_path='http://hgdownload.cse.ucsc.edu/goldenPath'
-biofold_path='http://snps.biofold.org/PhD-SNPg/ucsc'
+biofold_path='http://snps.biofold.org/Fido-SNP/ucsc'
 
 
 def get_ucsc_tools(arch_type):
@@ -47,9 +47,9 @@ def get_ucsc_tools(arch_type):
 	return out
 	
 
-def get_ucsc_data(hg,namefile,odir,ucsc_dat='http://hgdownload.cse.ucsc.edu/goldenPath'):
+def get_ucsc_data(hg,namefile,odir,biofold_path='http://snps.biofold.org/Fido-SNP/ucsc'):
 	prog_dir = os.path.dirname(os.path.abspath(__file__))
-        ucsc_dir = prog_dir+'/ucsc/'+hg
+        ucsc_dir = prog_dir+'/'+hg
 	prog_get = 'wget'
 	print '\n   Download',namefile
 	data = ucsc_dat+'/'+hg+'/'+odir+'/'+namefile
@@ -99,39 +99,39 @@ def setup(arch_type,hg='all',web=False):
 	if web: sys.exit(0)
 
 	dcount=0
-	print '\n4) Download UCSC Data. It can take several minutes depending on the newtork speed.'
-	if (hg=='all' or hg=='hg19'):
-		out=get_ucsc_data('hg19','hg19.2bit','bigZips')
+	biofold='http://snps.biofold.org/Fido-SNP/ucsc'
+	print '\n4) Download  Data. It can take several minutes depending on the newtork speed.'
+	if (hg=='all' or hg=='canfam2'):
+		out=get_ucsc_data('canfam2','canfam2.2bit','',biofold)
 		if out[0]==0: dcount+=1
-		biofold='http://snps.biofold.org/PhD-SNPg/ucsc'
-		out=get_ucsc_data('hg19','hg19.phyloP46way.primate.bw','',biofold)
+		out=get_ucsc_data('canfam2','canfam2.phyloP4way.bw','',biofold)
 		if out[0]==0: dcount+=1
-		out=get_ucsc_data('hg19','hg19.100way.phyloP100way.bw','phyloP100way')
+		out=get_ucsc_data('canfam2','canfam2.phyloP10way.bw','',biofold)
 		if out[0]==0: dcount+=1
 		if dcount<3:
-			print >> sys.stderr, 'ERROR: Problem in downloading hg19 data.'
+			print >> sys.stderr, 'ERROR: Problem in downloading canfam2 data.'
 			sys.exit(1)
 	dcount=0
-	if (hg=='all' or hg=='hg38'):
-		out=get_ucsc_data('hg38','hg38.2bit','bigZips')
+	if (hg=='all' or hg=='canfam3'):
+		out=get_ucsc_data('canfam3','canfam3.2bit','',biofold)
 		if out[0]==0: dcount+=1
-		out=get_ucsc_data('hg38','hg38.phyloP7way.bw','phyloP7way')
+		out=get_ucsc_data('canfam3','canfam3.phyloP4way.bw','',biofold)
 		if out[0]==0: dcount+=1
-		out=get_ucsc_data('hg38','hg38.phyloP100way.bw','phyloP100way')
+		out=get_ucsc_data('canfam3','canfam3.phyloP10way.bw','',biofold)
 		if out[0]==0: dcount+=1
 		if dcount<3:
-			print >> sys.stderr, 'ERROR: Problem in downloading hg38 data'
+			print >> sys.stderr, 'ERROR: Problem in downloading canfam3 data'
 			sys.exit(1)
-	print   '   Downloaded UCSC data'
+	print   '   Downloaded BioFolD data'
 
 
 def test(hg='all',web=False):
-	if hg=='hg19':
-		hgs=['hg19']
-	elif hg=='hg38':
-		hgs=['hg38']
+	if hg=='canfam2':
+		hgs=['canfam2']
+	elif hg=='canfam3':
+		hgs=['canfam3']
 	else:
-		hgs=['hg19','hg38']
+		hgs=['canfam2','canfam3']
 	prog_dir = os.path.dirname(os.path.abspath(__file__))
         ucsc_dir = prog_dir+'/ucsc'
 	test_dir = prog_dir+'/test'
@@ -159,13 +159,13 @@ def test(hg='all',web=False):
 		sys.exit(1)
 
 	if web:	
-		print '\n3) Check web hg19 and/or hg38 files'
-		dhg = {'hg19':[ucsc_path+'/hg19/bigZips/hg19.2bit', \
-			biofold_path+'/hg19/hg19.phyloP46way.primate.bw',\
-			ucsc_path+'/hg19/phyloP100way/hg19.100way.phyloP100way.bw'],\
-			'hg38':[ ucsc_path+'/hg38/bigZips/hg38.2bit', \
-			ucsc_path+'/hg38/phyloP7way/hg38.phyloP7way.bw',\
-			ucsc_path+'/hg38/phyloP100way/hg38.phyloP100way.bw']}
+		print '\n3) Check web canfam2 and/or canfam3 files'
+		dhg = {'canfam2':[ biofold_path+'/canfam2/canfam2.2bit', \
+			biofold_path+'/canfam2/canfam2.phyloP4way.bw',\
+			biofold_path+'/canfam2/canfam2.phyloP10way.bw'],\
+			'canfam3':[ biofold_path+'/canfam3/canfam3.2bit', \
+			biofold_path+'/canfam3/canfam3.phyloP4way.bw',\
+			biofold_path+'/canfam3/canfam3.phyloP10way.bw']}
 		for ihg in hgs:
 			for hgfile in dhg[ihg]:
 				cmd='curl --head -s '+hgfile
@@ -177,7 +177,7 @@ def test(hg='all',web=False):
 					print 'File',hgfile,'available.'
 
 	else:
-		print '\n3) Check local hg19 and/or hg38 files. Please wait, md5sum can take few minutes.'
+		print '\n3) Check local canfam2 and/or canfam3 files. Please wait, md5sum can take few minutes.'
 		for ihg in hgs:
         		cmd='cd '+ucsc_dir+'/'+ihg+'/; md5sum -c '+ihg+'.md5'
 			print 'CMD:',cmd
@@ -191,7 +191,7 @@ def test(hg='all',web=False):
 	print '\n4) Test twoBitToFa command'
 	for ihg in hgs:	
 		if web:
-			twobit=ucsc_path+'/'+ihg+'/bigZips/'+ihg+'.2bit'	
+			twobit=biofold_path+'/'+ihg+'/bigZips/'+ihg+'.2bit'	
 		else:
 			twobit=ucsc_dir+'/'+ihg+'/'+ihg+'.2bit'
 		cmd=ucsc_tool+'/twoBitToFa '+twobit+' stdout -seq=chr1 -start=10008 -end=10010'
@@ -205,15 +205,15 @@ def test(hg='all',web=False):
 	print '\n5) Test bigWigToBedGraph command'
 	for ihg in hgs:
 		if web:
-			if ihg=='hg19':
-				bwg=biofold_path+'/'+ihg+'/'+ihg+'.phyloP46way.primate.bw'
+			if ihg=='canfam2':
+				bwg=biofold_path+'/'+ihg+'/'+ihg+'.phyloP10way.bw'
 			else:
-				bwg=ucsc_path+'/'+ihg+'/phyloP100way/'+ihg+'.phyloP100way.bw'
+				bwg=biofold_path+'/'+ihg+'/'+ihg+'.phyloP10way.bw'
 		else:
-			if ihg=='hg19':
-				bwg=ucsc_dir+'/'+ihg+'/'+ihg+'.100way.phyloP100way.bw'
+			if ihg=='canfam3':
+				bwg=biofold_path+'/'+ihg+'/'+ihg+'.phyloP10way.bw'
 			else:
-				bwg=ucsc_dir+'/'+ihg+'/'+ihg+'.phyloP100way.bw'
+				bwg=biofold_path+'/'+ihg+'/'+ihg+'.phyloP10way.bw'
 		cmd=ucsc_tool+'/bigWigToBedGraph '+bwg+' stdout -chrom=chr1 -start=100008 -end=100012'
 		print 'CMD:',cmd
 		out=getstatusoutput(cmd)
@@ -222,12 +222,12 @@ def test(hg='all',web=False):
 			print >> sys.stderr,'ERROR: bigWigToBedGraph not working with',ihg
 			sys.exit(1)
 
-	print '\n6) Test predict_variants.py'
+	print '\n6) Test fido_variants.py'
 	for ihg in hgs:
 		if web:
-			cmd='python predict_variants.py test/test_short_variants_'+ihg+'.tsv -g '+ihg+' --web '
+			cmd='python fido_variants.py test/test_'+ihg+'.tsv -g '+ihg+' --web '
 		else:
-			cmd='python predict_variants.py test/test_short_variants_'+ihg+'.tsv -g '+ihg
+			cmd='python fido_variants.py test/test_'+ihg+'.tsv -g '+ihg
 		print 'CMD:',cmd
 		out=getstatusoutput(cmd)
 		print out[1]
@@ -240,21 +240,21 @@ def test(hg='all',web=False):
 
 def get_options():
 	import optparse
-        desc = 'Script for installing and testing PhD-SNPg.'
+        desc = 'Script for installing and testing Fido-SNP.'
         parser = optparse.OptionParser("usage: %prog cmd arch_type [-g hg] [--web]", description=desc)
         parser.add_option('-g','--genome', action='store', type='string', dest='hg', default='all', help='Genome version')
-	parser.add_option('--web', action='store_true', dest='web', default=False, help='Use UCSC web files')
+	parser.add_option('--web', action='store_true', dest='web', default=False, help='Use BioFolD web files')
 	(options, args) = parser.parse_args()
 	hg='all'
 	web=False
 	if options.hg: hg=options.hg.lower()
-	if hg!='hg19' and hg!='hg38': hg='all'
+	if hg!='canfam2' and hg!='canfam3': hg='all'
 	if options.web: web=True
 	if len(args)<1:
-		print 'python setup.py cmd arch_type [-g hg] [--web]'
+		print 'python setup.py cmd arch_type [-g canfam] [--web]'
 		print '  cmd: install or test'
 		print '  arch_type: linux.x86_64, linux.x86_64.v287, macOSX.x86_64, etc'
-		print '  -g = hg: all, hg19, hg38'
+		print '  -g = hg: all, canfam2, canfam3'
 		print '  -web = not download file'
 		sys.exit(0)
 	return args,hg,web
@@ -281,7 +281,7 @@ if __name__ == '__main__':
 		print 'python setup.py cmd arch_type [-g hg] [--web]'
 		print '  cmd: install or test'
 		print '  arch_type: linux.x86_64, linux.x86_64.v287, macOSX.x86_64, etc'
-		print '  -g = hg: all, hg19, hg38' 
+		print '  -g = hg: all, canfam2, canfam3' 
 		print '  -web = not download file'
 
 
