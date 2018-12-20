@@ -265,7 +265,7 @@ if __name__ == '__main__':
 	args,hg,web=get_options()
 	opt=args[0]
 	if opt=='install' and len(args)>1:
-		arch_type=args[2]
+		arch_type=args[1]
 		arch_list=['linux.x86_64.v287','linux.x86_64',\
 			'macOSX.x86_64','macOSX.i386','macOSX.ppc']
 		if arch_type not in arch_list:
