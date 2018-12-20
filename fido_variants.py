@@ -12,7 +12,7 @@ def global_vars():
 	ucsc_exe = ucsc_dir+'/exe'
 	prog_cat = 'zcat'
 	ucsc = 'http://hgdownload.cse.ucsc.edu/goldenPath'
-        biofold = 'http://snps.biofold.org/PhD-SNPg/ucsc'
+        biofold = 'http://snps.biofold.org/Fido-SNP/ucsc'
 	ucsc_web = {'canfam2.2bit':biofold+'/canfam2','hg38.2bit':ucsc+'/hg38/bigZips',\
 		'canfam3.2bit':biofold+'/canfam3',\
 		'canfam2.phyloP10way.bw':biofold+'/canfam2','canfam2.phyloP4way.bw':biofold+'/canfam2','canfam2.phyloP10way.bw':biofold+'/canfam2',\
