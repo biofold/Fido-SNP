@@ -150,7 +150,7 @@ def test(hg='all',web=False):
 				sys.exit(1)
 
 	print '\n2) Test zcat command'
-	cmd='zcat -f '+test_dir+'/test_variants_hg19.vcf.gz '
+	cmd='zcat -f '+test_dir+'/test_canfam3.vcf.gz '
 	print 'CMD:',cmd
 	out=getstatusoutput(cmd+' |grep -A 2 \'#CHROM\'')
 	print out[1]
@@ -253,7 +253,7 @@ def get_options():
 	if len(args)<1:
 		print 'python setup.py cmd arch_type [-g canfam] [--web]'
 		print '  cmd: install or test'
-		print '  arch_type: linux.x86_64, linux.x86_64.v287, macOSX.x86_64, etc'
+		print '  arch_type: linux.x86_64, macOSX.x86_64, etc'
 		print '  -g = hg: all, canfam2, canfam3'
 		print '  -web = not download file'
 		sys.exit(0)
@@ -280,7 +280,7 @@ if __name__ == '__main__':
 	else:
 		print 'python setup.py cmd arch_type [-g hg] [--web]'
 		print '  cmd: install or test'
-		print '  arch_type: linux.x86_64, linux.x86_64.v287, macOSX.x86_64, etc'
+		print '  arch_type: linux.x86_64, macOSX.x86_64, etc'
 		print '  -g = hg: all, canfam2, canfam3' 
 		print '  -web = not download file'
 
