@@ -191,7 +191,7 @@ def test(hg='all',web=False):
 	print '\n4) Test twoBitToFa command'
 	for ihg in hgs:	
 		if web:
-			twobit=biofold_path+'/'+ihg+'/bigZips/'+ihg+'.2bit'	
+			twobit=biofold_path+'/'+ihg+'/'+ihg+'.2bit'	
 		else:
 			twobit=ucsc_dir+'/'+ihg+'/'+ihg+'.2bit'
 		cmd=ucsc_tool+'/twoBitToFa '+twobit+' stdout -seq=chr1 -start=10008 -end=10010'
@@ -199,7 +199,7 @@ def test(hg='all',web=False):
 		out=getstatusoutput(cmd)
 		print out[1]
 		if out[0]!=0:
-			print >> sys.stderr,'ERROR: twoBitToFa not working with',ihs
+			print >> sys.stderr,'ERROR: twoBitToFa not working with',ihg
 			sys.exit(1)
 
 	print '\n5) Test bigWigToBedGraph command'
