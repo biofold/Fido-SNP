@@ -70,7 +70,9 @@ HOW TO RUN
 
 OUTPUT
 
-      Fido-SNP returns in output a probabilistic score between 0 and 1. If the score is >0.5 the variants is predicted as disease related. The probability is added as an extra column to the input file. An example of output is reported below.
+      Fido-SNP returns in output a probabilistic score between 0 and 1. If the score is >0.5 the variants
+      is predicted as disease related. The probability is added as an extra column to the input file. 
+      An example of output is reported below.
 
         1       15189413        C       G       Yes     Pathogenic    0.515   0.075  -0.027   0.317
         5       34700967        T       A       Yes     Benign        0.145   0.242   0.766   0.678
