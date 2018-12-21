@@ -19,7 +19,6 @@ INSTALLATION
 
       For Linux 64bit architecture there are two compiled versions:
         - linux.x86_64
-        - linux.x86_64.v287
 
       Installation time depends on the network speed.
       About 35G of UCSC like files need to be downloaded.
@@ -74,5 +73,5 @@ OUTPUT
       Fido-SNP returns in output a probabilistic score between 0 and 1. If the score is >0.5 the variants is predicted as disease related. The probability is added as an extra column to the input file. An example of output is reported below.
 
         1       15189413        C       G       Yes     Pathogenic    0.515   0.075  -0.027   0.317
-        5	34700967        T       A       Yes     Benign        0.145   0.242   0.766   0.678
+        5       34700967        T       A       Yes     Benign        0.145   0.242   0.766   0.678
         9       54071528        T       C       Yes     Benign        0.327   0.246  -0.402   0.260
