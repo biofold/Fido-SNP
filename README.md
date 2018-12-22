@@ -4,6 +4,7 @@
 INTRODUCTION
       
       Emidio Capriotti, 2018.
+      University of Bologna
       Scripts are licensed under the Creative Commons by NC-SA license.
 
       Fido-SNP is a program for the annotation of single nucleotide variants in dog genome.
