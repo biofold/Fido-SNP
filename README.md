@@ -44,13 +44,13 @@ MANUAL INSTALLATION
 
         - For canfam2 based predictions:
           canfam2.2bit: http://snps.biofold.org/Fido-SNP/ucsc/canfam2/canfam2.2bit
-          canfam2.phyloP4way.bw http://snps.biofold.org/ucsc/canfam2/canfam2.phyloP4way.bw
-          canfam2.phyloP10way.bw http://snps.biofold.org/ucsc/canfam2/canfam2.phyloP10way.bw
+          canfam2.phyloP4way.bw http://snps.biofold.org/Fido-SNP/ucsc/canfam2/canfam2.phyloP4way.bw
+          canfam2.phyloP10way.bw http://snps.biofold.org/Fido-SNP/ucsc/canfam2/canfam2.phyloP10way.bw
 
         - For canfam3 based predictions:
           canfam3.2bit: http://snps.biofold.org/Fido-SNP/ucsc/canfam3/canfam3.2bit
-          canfam3.phyloP4way.bw http://snps.biofold.org/ucsc/canfam3/canfam3.phyloP4way.bw
-          canfam3.phyloP10way.bw http://snps.biofold.org/ucsc/canfam3/canfam3.phyloP10way.bw
+          canfam3.phyloP4way.bw http://snps.biofold.org/Fido-SNP/ucsc/canfam3/canfam3.phyloP4way.bw
+          canfam3.phyloP10way.bw http://snps.biofold.org/Fido-SNP/ucsc/canfam3/canfam3.phyloP10way.bw
 
 
 HOW TO RUN
