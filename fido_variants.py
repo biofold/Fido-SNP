@@ -111,7 +111,7 @@ def make_prediction(ichr,ipos,wt,nw,modfile,ucsc_exe,ucsc_dbs,web=False,win=2,db
 	return
 
 
-def make_vcffile_predictions(namefile,modfile,ucsc_exe,ucsc_dbs,web=False,win=2,dbfasta='canfam2.2bit',dbpps=['canfam2.phyloP4way.bw','canfam2.phyloP10way.bw'],pklcod='canfam2_coding.pkl',fprog='twoBitToFa',cprog='bigWigToBedGraph',inputfile='prova_inputfile'):
+def make_vcffile_predictions(namefile,modfile,ucsc_exe,ucsc_dbs,web=False,win=2,dbfasta='canfam2.2bit',dbpps=['canfam2.phyloP4way.bw','canfam2.phyloP10way.bw'],pklcod='canfam2_coding.pkl',fprog='twoBitToFa',cprog='bigWigToBedGraph',inputfile=''):
 	v_input=[]
 	try:
 		model1=joblib.load(modfile[0])
