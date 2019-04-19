@@ -12,7 +12,7 @@ def global_vars():
 	ucsc_exe = ucsc_dir+'/exe'
 	prog_cat = 'zcat'
 	ucsc = 'http://hgdownload.cse.ucsc.edu/goldenPath'
-        biofold = 'http://snps.biofold.org/Fido-SNP/ucsc'
+        biofold = 'http://snps.biofold.org/PhD-SNPg/ucsc'
 	ucsc_web = {'canfam2.2bit':biofold+'/canfam2','hg38.2bit':ucsc+'/hg38/bigZips',\
 		'canfam3.2bit':biofold+'/canfam3',\
 		'canfam2.phyloP10way.bw':biofold+'/canfam2','canfam2.phyloP4way.bw':biofold+'/canfam2','canfam2.phyloP10way.bw':biofold+'/canfam2',\
@@ -77,7 +77,7 @@ def make_prediction(ichr,ipos,wt,nw,modfile,ucsc_exe,ucsc_dbs,web=False,win=2,db
 		sys.exit(1)
 	if cons_input1==[]: 
 		cons_input1=[0.0 for i in range(2*win+1)]
-		print >> sys.stderr,'WARNING: PhyloP7 data not found for position',ichr,pos
+		print >> sys.stderr,'WARNING: PhyloP4 data not found for position',ichr,pos
 		
 
 	try:
@@ -102,7 +102,7 @@ def make_prediction(ichr,ipos,wt,nw,modfile,ucsc_exe,ucsc_dbs,web=False,win=2,db
 		print >> sys.stderr,'WARNING: Variants not scored. Check modfile and input'
 		print '\t'.join([str(i) for i in [ichr,ipos,wt,nw] ])+'\tNA\tNA\tNA\tNA\tNA\tNA'
 	else:
-		print "#CHROM\tPOS\tREF\tALT\tCODING\tPREDICTION\tSCORE\tFDR\tPhyloP10\tAvgPhyloP10"
+		print "#CHROM\tPOS\tREF\tALT\tCODING\tPREDICTION\tSCORE\tFDR\tPhyloP11\tAvgPhyloP11"
 		pp100=cons_input2[win]
 		avgpp100=sum(cons_input2)/float(len(cons_input2))
 		if c_pred[0] == "Pathogenic": d_fdr=v_fdr[0]
@@ -126,7 +126,7 @@ def make_vcffile_predictions(namefile,modfile,ucsc_exe,ucsc_dbs,web=False,win=2,
 		if line == '': continue
 		line='\t'.join(line.split())
 		if line[0]=='#':
-			if line.find('#CHROM')==0: line=line+'\tCODING\tPREDICTION\tSCORE\tFDR\tPhyloP10\tAvgPhyloP10'
+			if line.find('#CHROM')==0: line=line+'\tCODING\tPREDICTION\tSCORE\tFDR\tPhyloP11\tAvgPhyloP11'
 			print line
 			continue 	
 		v=line.rstrip().split('\t')
@@ -193,7 +193,7 @@ def make_vcffile_predictions(namefile,modfile,ucsc_exe,ucsc_dbs,web=False,win=2,
 			continue
 		if cons_input1==[]: 
 			cons_input1=[0.0 for i in range(2*win+1)]
-			print >> sys.stderr,'WARNING: PhyloP7 data not found in line',c,ichr,pos
+			print >> sys.stderr,'WARNING: PhyloP4 data not found in line',c,ichr,pos
 		p_cod=0
 		cod='No'
 		if r_cod!=[]: 
@@ -242,7 +242,7 @@ def make_vcffile_multialleles_predictions(namefile,modfile,ucsc_exe,ucsc_dbs,web
 		if line == '': continue
 		line='\t'.join(line.split())
 		if line[0]=='#':
-			if line.find('#CHROM')==0: line=line+'\tCODING\tPREDICTION\tSCORE\tFDR\tPhyloP10\tAvgPhyloP10'
+			if line.find('#CHROM')==0: line=line+'\tCODING\tPREDICTION\tSCORE\tFDR\tPhyloP11\tAvgPhyloP11'
 			print line
 			continue 	
 		v=line.rstrip().split('\t')
@@ -322,7 +322,7 @@ def make_vcffile_multialleles_predictions(namefile,modfile,ucsc_exe,ucsc_dbs,web
 				continue
 			if cons_input1==[]: 
 				cons_input1=[0.0 for i in range(2*win+1)]
-				print >> sys.stderr,'WARNING: PhyloP7 data not found for line '+str(c)+'. Genome location:',ichr,pos
+				print >> sys.stderr,'WARNING: PhyloP4 data not found for line '+str(c)+'. Genome location:',ichr,pos
 			p_cod=0
 			cod='No'
 			if r_cod!=[]:
@@ -369,7 +369,7 @@ def make_tsvfile_predictions(namefile,modfile,ucsc_exe,ucsc_dbs,web=False,win=2,
 	proc = subprocess.Popen([prog_cat,'-f',namefile], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 	stdout, stderr = proc.communicate()        
 	c=0
-	print "#CHROM\tPOS\tREF\tALT\tCODING\tPREDICTION\tSCORE\tFDR\tPhyloP10\tAvgPhyloP10"
+	print "#CHROM\tPOS\tREF\tALT\tCODING\tPREDICTION\tSCORE\tFDR\tPhyloP11\tAvgPhyloP11"
 	for line in stdout.split('\n'):
 		if line == '': continue 
 		v=line.rstrip().split()
@@ -441,7 +441,7 @@ def make_tsvfile_predictions(namefile,modfile,ucsc_exe,ucsc_dbs,web=False,win=2,
 			continue
 		if cons_input1==[]: 
 			cons_input1=[0.0 for i in range(2*win+1)]
-			print >> sys.stderr,'WARNING: PhyloP7 data not found for line',c,'mutated site',ichr,pos
+			print >> sys.stderr,'WARNING: PhyloP4 data not found for line',c,'mutated site',ichr,pos
 		p_cod=0
 		cod='No'
 		if r_cod!=[]: 
@@ -479,7 +479,7 @@ def make_file_predictions(namefile,modfile,ucsc_exe,ucsc_dbs,web=False,win=2,s='
 		sys.exit(1)
 	f=open(namefile)
 	c=1
-	print "#CHROM\tPOS\tREF\tALT\tCODING\tPREDICTION\tSCORE\tFDR\tPhyloP10\tAvgPhyloP10"
+	print "#CHROM\tPOS\tREF\tALT\tCODING\tPREDICTION\tSCORE\tFDR\tPhyloP11\tAvgPhyloP11"
 	for line in f:	
 		v=line.rstrip().split(s)
 		if len(v)<4: 
@@ -540,7 +540,7 @@ def make_file_predictions(namefile,modfile,ucsc_exe,ucsc_dbs,web=False,win=2,s='
 			continue
 		if cons_input1==[]: 
 			cons_input1=[0.0 for i in range(2*win+1)]
-			print >> sys.stderr,'WARNING: PhyloP7 data not found for line',c,ichr,pos
+			print >> sys.stderr,'WARNING: PhyloP4 data not found for line',c,ichr,pos
 
 		p_cod=0
 		cod='No'

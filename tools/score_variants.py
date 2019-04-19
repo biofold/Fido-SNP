@@ -44,6 +44,10 @@ def parse_variants(ichr,pos,wt,nw,ucsc_exe,ucsc_dbs,web=False,dbfasta='canfam2.2
 	n_nw=''
 	if wt=='-': wt=''
 	if nw=='-': nw=''
+	# Consider only Single Nucleotide Variants
+	if wt==nw or 'ACGT'.find(wt)==-1 or 'ACGT'.find(nw)==-1 or len(wt)!=1 or len(nw)!=1:
+		print >> sys.stderr,'ERROR: Incorrect Single Nucleotide Variant.'
+		return n_wt,n_nw,n_pos
 	db_file=ucsc_dbs+'/'+dbfasta
 	if web: db_file=ucsc_web[dbfasta]+'/'+dbfasta
 	cmd=ucsc_exe+'/'+fprog+' '+db_file+' stdout -seq='+ichr+' -start='+str(ipos)+' -end='+str(ipos+wseq)+' | grep -v "^>" | tr -d "\n" '
@@ -309,7 +313,7 @@ def make_prediction(ichr,ipos,wt,nw,modfile,ucsc_exe,ucsc_dbs,web=False,win=2,db
 		print >> sys.stderr,'WARNING: Variants not scored. Check modfile and input'
 		print '\t'.join([str(i) for i in [ichr,ipos,wt,nw] ])+'\tNA\tNA\tNA\tNA\tNA\tNA'
 	else:
-		print "#CHROM\tPOS\tREF\tALT\tCODING\tPREDICTION\tSCORE\tFDR\tPhyloP10\tAvgPhyloP10"
+		print "#CHROM\tPOS\tREF\tALT\tCODING\tPREDICTION\tSCORE\tFDR\tPhyloP11\tAvgPhyloP11"
 		pp100=cons_input2[win]
 		avgpp100=sum(cons_input2)/float(len(cons_input2))
 		if c_pred[0] == "Pathogenic": d_fdr=v_fdr[0]
@@ -364,7 +368,7 @@ def get_file_input(namefile,ucsc_exe,ucsc_dbs,web=False,win=2,s='\t',dbfasta='ca
 			continue
 		if cons_input1==[]:
 			cons_input1=[0.0 for i in range(2*win+1)]
-                        print >> sys.stderr,'WARNING: PhyloP7 data not found for line',c,ichr,pos
+                        print >> sys.stderr,'WARNING: PhyloP4 data not found for line',c,ichr,pos
 		p_cod=0
 		if r_cod!=[]: p_cod=1
 		vlines.append([v,seq,seq_input,cons_input1,cons_input2,[lwt,lnw,p_cod]])
@@ -381,7 +385,7 @@ def make_file_predictions(namefile,modfile,ucsc_exe,ucsc_dbs,web=False,win=2,s='
 		sys.exit(1)
 	f=open(namefile)
 	c=1
-	print "#CHROM\tPOS\tREF\tALT\tCODING\tPREDICTION\tSCORE\tFDR\tPhyloP10\tAvgPhyloP10"
+	print "#CHROM\tPOS\tREF\tALT\tCODING\tPREDICTION\tSCORE\tFDR\tPhyloP11\tAvgPhyloP11"
 	for line in f:	
 		v=line.rstrip().split(s)
 		if len(v)<4: print >> sys.stderr,'WARNING: Incorrect line ',c,line.rstrip()
