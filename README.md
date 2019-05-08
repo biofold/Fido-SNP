@@ -10,10 +10,9 @@ INTRODUCTION
       Fido-SNP is a program for the annotation of single nucleotide variants in dog genome.
 
       Please cite:
-
-     Capriotti E, Montanucci L, Profiti G, Rossi I, Giannuzzi D, Aresu L, Fariselli P. (2019).
-     Fido-SNP: The first webserver for scoring the impact of single nucleotide variants in the dog genome.
-     Nucleic Acids Research. DOI:10.1093/nar/gkz420.
+      Capriotti E, Montanucci L, Profiti G, Rossi I, Giannuzzi D, Aresu L, Fariselli P. (2019).
+      Fido-SNP: The first webserver for scoring the impact of single nucleotide variants in the dog genome.
+      Nucleic Acids Research. DOI:10.1093/nar/gkz420.
 
 
 INSTALLATION
