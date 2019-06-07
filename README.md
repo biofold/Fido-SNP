@@ -7,7 +7,7 @@ INTRODUCTION
       University of Bologna
       Scripts are licensed under the Creative Commons by NC-SA license.
 
-      Fido-SNP is a program for the annotation of single nucleotide variants in dog genome.
+      Fido-SNP is a program for the annotation of single nucleotide variants in the dog genome.
 
       Please cite:
       Capriotti E, Montanucci L, Profiti G, Rossi I, Giannuzzi D, Aresu L, Fariselli P. (2019).
